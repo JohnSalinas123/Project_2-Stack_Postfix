@@ -13,15 +13,15 @@ CS2400 - Project 2 Stacks - Postfix
 
 Set up core files of project with given code from source code (John Salinas)
 
-(Excel)Use a stack to manually convert the given infix expression to postfix (Name goes here)
+(Excel)Use a stack to manually convert the given infix expression to postfix (Daniel)
 <ul>
     <li> a * b / (c - a) + d * e </li>
     <li> answer sheet must show the conversion process step by step </li>
 </ul>
 
-(Coding)Use LinkedStack class to implement algorithm convertToPostFix (Name goes here)
+(Coding)Use LinkedStack class to implement algorithm convertToPostFix (John Salinas)
 
-(Coding)Write a main method to test implementation, convertToPostFix (Name goes here)
+(Coding)Write a main method to test implementation, convertToPostFix (John Salinas)
 
 (Book)Read and Study textbook from pages 168 to page 170 (All members) <br />
 <ul>
@@ -29,20 +29,20 @@ Set up core files of project with given code from source code (John Salinas)
 </ul>
     
 
-(Excel)Use a stack to manually evaluate given postfix expression (Name goes here) <br />
+(Excel)Use a stack to manually evaluate given postfix expression (Daniel) <br />
 <ul>
     <li>Values are given in instructions</li>
 </ul>
 
-(Coding)Use ResizeableArrayStack class to implement the algorithm evaluatePostfix (Name goes here)
+(Coding)Use ResizeableArrayStack class to implement the algorithm evaluatePostfix (Priscilla)
 
-(Coding)Write a main method to test implementation, evaluatePostfix (Name goes here)
+(Coding)Write a main method to test implementation, evaluatePostfix (Priscilla)
 
 Javadoc comments (John Salinas)
 
 Screencast recording, talk about your code briefly, less than 3 minutes (All members)
 
-Unit testing on added methods using unit test framework (John Salinas)
+Unit testing on added methods using unit test framework (Priscilla)
 
 ## iii) Link to Javadoc:
 
