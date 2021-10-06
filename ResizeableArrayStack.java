@@ -108,6 +108,12 @@ public final class ResizeableArrayStack<T> implements StackInterface<T>
         // Assertion: topIndex is -1
     } // end clear
 
+    @Override
+    public char[] convertToPostfix(String infixStr) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
     
     
 } // end ArrayStack
