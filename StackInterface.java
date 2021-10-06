@@ -25,4 +25,9 @@ public interface StackInterface<T>
   
    /** Removes all entries from this stack. */
    public void clear();
+
+   public char[] convertToPostfix(String infixStr);
+
 } // end StackInterface
+
+    
