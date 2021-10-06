@@ -94,34 +94,28 @@ public final class LinkedStack<T> implements StackInterface<T>
       String postfix = "";
       char[] postfixChar = postfix.toCharArray();
       char[] infixChar = infix.toCharArray();
+      char topOperator = ' ';
 
       int infixLength = infix.length();
-
       int currentPosition = 0;
-
-      char topOperator = 'a';
       int nextCharPreced = 0;
       int peekPreced = 0;
 
       while (currentPosition < infixLength) {
+
          postfixChar = postfix.toCharArray();
-
          char nextCharacter = ' ';
-
-         //System.out.println(currentPosition);
 
          // sets nextCharacter to next nonblank character of infix
          for (int i = currentPosition;i < infixLength;i++) {
             if (infixChar[i] != ' ') {
                nextCharacter = infixChar[i];
-               //System.out.println(nextCharacter);
                break;
             }
             currentPosition++;
          }
           
-
-         // determing the precedence of the top of the operator stack
+         // determine the precedence of the top of the stack, operatorStack.peek();
          if (!operatorStack.isEmpty()) {
             char peekChar = operatorStack.peek();
             switch (peekChar) {
@@ -146,7 +140,7 @@ public final class LinkedStack<T> implements StackInterface<T>
 
          }
          
-         // determines the precedence if nextCharacter is an operator
+         // determines the precedence of nextCharacter
          switch (nextCharacter) {
             case '(': case ')':
                nextCharPreced = 0;
@@ -167,14 +161,11 @@ public final class LinkedStack<T> implements StackInterface<T>
                break;
          }
 
-         
 
          if (nextCharacter >= 'a' && nextCharacter <= 'z') {
 
             postfix = postfix + nextCharacter;
             currentPosition++;
-
-            //System.out.println("Was a letter");
 
          } else if (nextCharacter == '^') {
 
@@ -184,28 +175,22 @@ public final class LinkedStack<T> implements StackInterface<T>
          } else if (nextCharacter == '+' || nextCharacter == '-' || nextCharacter == '*' || nextCharacter == '/') {
 
             while (!operatorStack.isEmpty() && nextCharPreced <= peekPreced) {
+
                postfix = postfix + operatorStack.peek();
                operatorStack.pop();
+
             }
-            //System.out.println("nextCharacter: " + nextCharacter);
 
             operatorStack.push(nextCharacter);
-            //System.out.println("peek testing: " + operatorStack.peek());
-            
-
             currentPosition++;
-            //System.out.println("Was an operator");
+
          } else if (nextCharacter == '(') {
 
             operatorStack.push(nextCharacter);
-            //System.out.println("peek testing: " + operatorStack.peek());
             currentPosition++;
-            //System.out.println("Was a (");
 
          } else if (nextCharacter == ')') {
-            //System.out.println("Peek: " + operatorStack.peek());
-            //System.out.println("topOperator: " + topOperator);
-            //System.out.println("topNode: " + topNode.getData());
+
             topOperator = operatorStack.pop();
             while (topOperator != '(') {
 
@@ -214,18 +199,14 @@ public final class LinkedStack<T> implements StackInterface<T>
 
             }
             currentPosition++;
-            //System.out.println("Was a )");
 
          } else {
+
             currentPosition++;
             break;
+            
          }
 
-         //System.out.println("End of loop, data was: " + operatorStack.peek());
-         //System.out.println("End of loop");
-
-         //System.out.println("Postfix is: " + postfix);
-         //System.out.println("topNode: " + topNode);
       }
       
       while (!operatorStack.isEmpty()) {
@@ -236,7 +217,5 @@ public final class LinkedStack<T> implements StackInterface<T>
       postfixChar = postfix.toCharArray();
       return postfixChar;
    }
-
-    
 
 } // end LinkedStack
