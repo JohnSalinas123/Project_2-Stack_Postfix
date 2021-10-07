@@ -1,9 +1,8 @@
 import java.util.EmptyStackException;
 
 /**
- * 
+ * A class of stacks who entries are stored in a chain of nodes.
  */
-
 public final class LinkedStack<T> implements StackInterface<T>
 {
 	private Node topNode; // References the first node in the chain
@@ -51,8 +50,10 @@ public final class LinkedStack<T> implements StackInterface<T>
       } // end setNextNode
 	} // end Node
 
-   //  < Implementations of the stack operations go here. >
-
+   
+   /** Adds newEntry to the top of the stack.
+    * @param newEntry The entry being added to the stack.
+    */
     @Override
     public void push(T newEntry) {
          Node newNode = new Node(newEntry, topNode);
@@ -60,6 +61,10 @@ public final class LinkedStack<T> implements StackInterface<T>
         
     } // end push
 
+    
+    /** Remove the top of the stack and return the data of that element.
+     * @return T The data of the element at the top of the stack.
+     */
     @Override
     public T pop() {
          T top = peek(); // Might throw EmptyStackException
@@ -68,6 +73,11 @@ public final class LinkedStack<T> implements StackInterface<T>
         return top;
     } // end pop
 
+    
+    /** Looks at the data of element at the top of the stack, if there is one 
+     * returns the data, if not it throws an exception.
+     * @return T The data of the element at the top of the stack.
+     */
     @Override
     public T peek() {
          if (isEmpty()) {
@@ -77,17 +87,29 @@ public final class LinkedStack<T> implements StackInterface<T>
          }
     } // end peek
 
+    
+    /** Checks if the stack is empty.
+     * @return boolean True if the stack is empty, false if not.
+     */
     @Override
     public boolean isEmpty() {
          return topNode == null;
     } // end isEmpty
 
+    /**
+     * Removes the topNode reference to the linked data, clearing the stack.
+     */
     @Override
     public void clear() {
       topNode = null;
     } // end clear
 
 
+   
+   /** Converts the input infix expression to a postfix expression.
+    * @param infix The infix input to be converted to postfix.
+    * @return char[] The converted postfix expression.
+    */
    public char[] convertToPostfix(String infix) {
       StackInterface<Character> operatorStack = new LinkedStack<>();
 

@@ -26,6 +26,10 @@ public interface StackInterface<T>
    /** Removes all entries from this stack. */
    public void clear();
 
+   /** Converts the input infix expression to a postfix expression.
+    * @param infix The infix input to be converted to postfix.
+    * @return char[] The converted postfix expression.
+    */
    public char[] convertToPostfix(String infixStr);
 
 } // end StackInterface
