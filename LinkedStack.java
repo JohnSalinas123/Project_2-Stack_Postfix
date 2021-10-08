@@ -38,7 +38,7 @@ public final class LinkedStack<T> implements StackInterface<T>
       {
          data = newData;
       } // end setData
-      
+   
       private Node getNextNode()
       {
          return next;
@@ -114,9 +114,6 @@ public final class LinkedStack<T> implements StackInterface<T>
        int precedence = 0;
       
        switch (operator) {
-         //case '(': case ')':
-            //precedence = 0;
-            //break;
          case '*':
             precedence = 2;
             break;
@@ -147,7 +144,7 @@ public final class LinkedStack<T> implements StackInterface<T>
       StackInterface<Character> operatorStack = new LinkedStack<>();
 
       String postfix = "";
-      char[] postfixChar = postfix.toCharArray();
+      char[] postfixChar;
       char[] infixChar = infix.toCharArray();
       char topOperator = ' ';
 
@@ -157,80 +154,46 @@ public final class LinkedStack<T> implements StackInterface<T>
       int peekPreced = 0;
 
       while (currentPosition < infixLength) {
-
-         postfixChar = postfix.toCharArray();
-         char nextCharacter = ' ';
-
-         // sets nextCharacter to next nonblank character of infix
-         for (int i = currentPosition;i < infixLength;i++) {
-            if (infixChar[i] != ' ') {
-               nextCharacter = infixChar[i];
-               break;
-            }
-            currentPosition++;
-         }
-          
+         //postfixChar = postfix.toCharArray();
+         char nextCharacter = infixChar[currentPosition];
+         
          // determine the precedence of the operator at the top of the stack
          if (!operatorStack.isEmpty()) {
             peekPreced = getPrecedence(operatorStack.peek());
          }
-         
          // determines the precedence of nextCharacter
          nextCharPreced = getPrecedence(nextCharacter);
 
-
+         // determine what operator is next, and perform actions accordingly
          if (nextCharacter >= 'a' && nextCharacter <= 'z') {
-
-            postfix = postfix + nextCharacter;
+            postfix += nextCharacter;
             currentPosition++;
-
-         } else if (nextCharacter == '^') {
-
+         } else if (nextCharacter == '^' || nextCharacter == '(') {
             operatorStack.push(nextCharacter);
             currentPosition++;
-
          } else if (nextCharacter == '+' || nextCharacter == '-' || nextCharacter == '*' || nextCharacter == '/') {
-
             while (!operatorStack.isEmpty() && nextCharPreced <= peekPreced) {
-
-               postfix = postfix + operatorStack.peek();
+               postfix += operatorStack.peek();
                operatorStack.pop();
-
             }
-
             operatorStack.push(nextCharacter);
             currentPosition++;
-
-         } else if (nextCharacter == '(') {
-
-            operatorStack.push(nextCharacter);
-            currentPosition++;
-
          } else if (nextCharacter == ')') {
-
-            topOperator = operatorStack.pop();
-            while (topOperator != '(') {
-
-               postfix = postfix + topOperator;
                topOperator = operatorStack.pop();
-
-            }
-            currentPosition++;
-
+               while (topOperator != '(') {
+                  postfix = postfix + topOperator;
+                  topOperator = operatorStack.pop();
+               }
+               currentPosition++;
          } else {
-
             currentPosition++;
-            break;
-            
          }
-
       }
-      
+
       while (!operatorStack.isEmpty()) {
             topOperator = operatorStack.pop();
             postfix = postfix + topOperator;
-      } 
-
+      }
       postfixChar = postfix.toCharArray();
       return postfixChar;
    }
