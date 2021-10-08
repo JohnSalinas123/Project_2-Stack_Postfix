@@ -105,12 +105,45 @@ public final class LinkedStack<T> implements StackInterface<T>
     } // end clear
 
 
+    /**
+     * Determines the precedence of a given operator.
+     * @param operator The operator whose precedence will be determined.
+     * @return Integer value of the operator's precedence.
+     */
+    private int getPrecedence(char operator) {
+       int precedence = 0;
+      
+       switch (operator) {
+         //case '(': case ')':
+            //precedence = 0;
+            //break;
+         case '*':
+            precedence = 2;
+            break;
+         case '/':
+            precedence = 2;
+            break;
+         case '+':
+            precedence = 1;
+            break;
+         case '-':
+            precedence = 1;
+            break;
+         default:
+            break;
+      }
+
+      return precedence;
+    }
+
+
    
    /** Converts the input infix expression to a postfix expression.
     * @param infix The infix input to be converted to postfix.
     * @return char[] The converted postfix expression.
     */
    public char[] convertToPostfix(String infix) {
+      // create a new stack, whose data are of the character type
       StackInterface<Character> operatorStack = new LinkedStack<>();
 
       String postfix = "";
@@ -137,51 +170,13 @@ public final class LinkedStack<T> implements StackInterface<T>
             currentPosition++;
          }
           
-         // determine the precedence of the top of the stack, operatorStack.peek();
+         // determine the precedence of the operator at the top of the stack
          if (!operatorStack.isEmpty()) {
-            char peekChar = operatorStack.peek();
-            switch (peekChar) {
-               case '(': case ')':
-                  peekPreced = 0;
-                  break;
-               case '*':
-                  peekPreced = 2;
-                  break;
-               case '/':
-                  peekPreced = 2;
-                  break;
-               case '+':
-                  peekPreced = 1;
-                  break;
-               case '-':
-                  peekPreced = 1;
-                  break;
-               default:
-                  break;
-            }
-
+            peekPreced = getPrecedence(operatorStack.peek());
          }
          
          // determines the precedence of nextCharacter
-         switch (nextCharacter) {
-            case '(': case ')':
-               nextCharPreced = 0;
-                  break;
-            case '*':
-               nextCharPreced = 2;
-               break;
-            case '/':
-               nextCharPreced = 2;
-               break;
-            case '+':
-               nextCharPreced = 1;
-               break;
-            case '-':
-               nextCharPreced = 1;
-               break;
-            default:
-               break;
-         }
+         nextCharPreced = getPrecedence(nextCharacter);
 
 
          if (nextCharacter >= 'a' && nextCharacter <= 'z') {
