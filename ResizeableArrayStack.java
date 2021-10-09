@@ -2,9 +2,8 @@ import java.util.Arrays;
 import java.util.EmptyStackException;
 
 /**
- * 
+ * Stack implemented using a resizeable array.
  */
-
 public final class ResizeableArrayStack<T> implements StackInterface<T>
 {
     private T[] stack;    // Array of stack entries
@@ -31,9 +30,11 @@ public final class ResizeableArrayStack<T> implements StackInterface<T>
         integrityOK = true;
   } // end constructor
 
-    //  < Implementations of the private methods go here; checkCapacity and checkIntegrity
-    //    are analogous to those in Chapter 2. >
-
+    
+    /** Checks whether the capacity of the stack has exceeded the max capacity, if so
+     * an IllegalStateException is thrown.
+     * @param capacity The capacity of the stack.
+     */
     private void checkCapacity(int capacity) {
         if (capacity > MAX_CAPACITY) {
             throw new IllegalStateException("Attempt to create a bag whose " +
@@ -43,6 +44,11 @@ public final class ResizeableArrayStack<T> implements StackInterface<T>
 
     } // end checkCapacity
 
+    /**
+     * Ensures that there is enough capacity in the stack, if not it makes 
+     * a new stack
+     * with double the capacities.
+     */
     private void ensureCapacity() {
         if (topIndex >= stack.length - 1) {
             int newLength = 2 * stack.length;
@@ -51,14 +57,20 @@ public final class ResizeableArrayStack<T> implements StackInterface<T>
         }
     } // end ensureCapacity
 
+    /**
+     * Checks the integrity of the stack, if not then a SecurityException
+     * is thrown.
+     */
     private void checkIntegrity() {
         if (!integrityOK) {
             throw new SecurityException("ArrayStack object is corrupt");
         }
     } // end checkIntegrity
 
-    //  < Implementations of the stack operations go here. >
-
+    
+    /** Adds newEntry to the top of the stack.
+     * @param newEntry The entry being added to the top of the stack.
+     */
     @Override
     public void push(T newEntry) {
         checkIntegrity();
@@ -67,6 +79,10 @@ public final class ResizeableArrayStack<T> implements StackInterface<T>
         topIndex++;
     } // end push
 
+    
+    /** Removes the top of the stack and return the data of that element.
+     * @return T The data of the element at the top of the stack.
+     */
     @Override
     public T pop() {
         checkIntegrity();
@@ -80,6 +96,9 @@ public final class ResizeableArrayStack<T> implements StackInterface<T>
         }
     } // end pop 
 
+    /** Remove the top of the stack and return the data of that element.
+     * @return T The data of the element at the top of the stack.
+     */
     @Override
     public T peek() {
         checkIntegrity();
@@ -90,17 +109,21 @@ public final class ResizeableArrayStack<T> implements StackInterface<T>
         }
     } // end peek
 
+    
+    /** Checks if the stack is empty.
+     * @return boolean True if the stack is empty, false if not.
+     */
     @Override
     public boolean isEmpty() {
         return topIndex < 0;
     } // end isEmpty
 
+    /**
+     * Sets each array index of the stack to null, clearing the stack.
+     */
     @Override
     public void clear() {
         checkIntegrity();
-
-        // Remove refferences to the objects in the stack
-        // but do not deallocate the array
         while (topIndex > -1) {
             stack[topIndex] = null;
             topIndex--;
@@ -108,6 +131,11 @@ public final class ResizeableArrayStack<T> implements StackInterface<T>
         // Assertion: topIndex is -1
     } // end clear
 
+    
+    /** 
+     * @param infixStr
+     * @return char[]
+     */
     @Override
     public char[] convertToPostfix(String infixStr) {
         // TODO Auto-generated method stub
