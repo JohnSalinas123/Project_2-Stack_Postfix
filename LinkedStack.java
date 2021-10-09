@@ -1,7 +1,7 @@
 import java.util.EmptyStackException;
 
 /**
- * A class of stacks who entries are stored in a chain of nodes.
+ * Stack implemented using linked data.
  */
 public final class LinkedStack<T> implements StackInterface<T>
 {
@@ -52,7 +52,7 @@ public final class LinkedStack<T> implements StackInterface<T>
 
    
    /** Adds newEntry to the top of the stack.
-    * @param newEntry The entry being added to the stack.
+    * @param newEntry The entry being added to the top of the stack.
     */
     @Override
     public void push(T newEntry) {
@@ -145,13 +145,20 @@ public final class LinkedStack<T> implements StackInterface<T>
 
       String postfix = "";
       char[] postfixChar;
-      char[] infixChar = infix.toCharArray();
       char topOperator = ' ';
+      char[] infixChar = new char[25];
 
-      int infixLength = infix.length();
+      int infixLength = 0;
       int currentPosition = 0;
       int nextCharPreced = 0;
       int peekPreced = 0;
+
+      if (infix != null && !infix.isEmpty()) {
+         infixChar = infix.toCharArray();
+         infixLength = infix.length();
+      } else {
+         System.out.println("Input string infix is either empty/null!");
+      }
 
       while (currentPosition < infixLength) {
          //postfixChar = postfix.toCharArray();
@@ -161,7 +168,7 @@ public final class LinkedStack<T> implements StackInterface<T>
          if (!operatorStack.isEmpty()) {
             peekPreced = getPrecedence(operatorStack.peek());
          }
-         // determines the precedence of nextCharacter
+         // determine the precedence of nextCharacter
          nextCharPreced = getPrecedence(nextCharacter);
 
          // determine what operator is next, and perform actions accordingly
