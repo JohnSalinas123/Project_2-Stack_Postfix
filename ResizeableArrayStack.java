@@ -141,7 +141,70 @@ public final class ResizeableArrayStack<T> implements StackInterface<T>
         // TODO Auto-generated method stub
         return null;
     }
+    public static double evaluePostfix(String postfixString) {
+       
+    StackInterface<Character> valueStackInterface = new ResizeableArrayStack<>() ;
+        String postfix = "" ;
+        char nextItem ;
+        int operand1 ;
+        int operand2 ;
+        int result = 0 ;
+        int i = 0 ;
 
+        while(i < postfix.length() ) {
+            nextItem = postfix.charAt(i) ;
+            if (charVariable(nextItem))
+                valueStackInterface.push(nextItem) ;
+            else {
+                operand1 = valueStackInterface.pop() ;
+                operand2 = valueStackInterface.pop() ;
+                switch(nextItem){
+                    case '+':result = operand1 + operand2;
+                    break;
+                    case '*':result = operand1 * operand2;
+                        break;
+                    case '-':result = operand1 - operand2;
+                        break;
+                    case '/':result = operand1 / operand2;
+                        break;
+                        default:break;
+                }
+                valueStackInterface.push(result);
+            }
+            i++ ;
+
+        }
+
+        
+        return valueStackInterface.pop() ;
+    }
+
+
+private int getPrecedence(char operator) {
+    int precedence = 0 ;
+    switch(operator){
+        case '*':
+            precedence = 2;
+            break;
+         case '/':
+            precedence = 2;
+            break;
+         case '+':
+            precedence = 1;
+            break;
+         case '-':
+            precedence = 1;
+            break;
+         default:
+            break;
+      }
+
+      return precedence;
+    }
+
+private static boolean charVariable(char ch){
+    return(ch == 'a') || (ch == 'b') || (ch == 'c') || (ch == 'd') ;
+}
     
     
 } // end ArrayStack
