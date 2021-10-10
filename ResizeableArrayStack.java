@@ -132,15 +132,6 @@ public final class ResizeableArrayStack<T> implements StackInterface<T>
     } // end clear
 
     
-    /** 
-     * @param infixStr
-     * @return char[]
-     */
-    @Override
-    public char[] convertToPostfix(String infixStr) {
-        // TODO Auto-generated method stub
-        return null;
-    }
 
     
     
