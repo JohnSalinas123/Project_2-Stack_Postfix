@@ -109,7 +109,5 @@ public final class ResizeableArrayStack<T> implements StackInterface<T>
         }
         // Assertion: topIndex is -1
     } // end clear
-    // TODO Auto-generated method stub 
-
  
-         }
+}
