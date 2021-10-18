@@ -1,7 +1,7 @@
 import java.util.EmptyStackException;
 
 /**
- * Stack implemented using linked data.
+ * An implementation of the ADT stack using a linked chain.
  */
 public final class LinkedStack<T> implements StackInterface<T>
 {
