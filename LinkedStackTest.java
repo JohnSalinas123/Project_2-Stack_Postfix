@@ -1,15 +1,19 @@
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+
+import org.junit.Test;
+
 public class LinkedStackTest {
 
     /** Converts the input infix expression to a postfix expression.
     * @param infix The infix input to be converted to postfix.
     * @return char[] The converted postfix expression.
     */
-   public static char[] convertToPostfix(String infix) {
+   public static String convertToPostfix(String infix) {
         // create a new stack, whose data are of the character type
         StackInterface<Character> operatorStack = new LinkedStack<>();
 
         String postfix = "";
-        char[] postfixChar;
         char topOperator = ' ';
         char[] infixChar = new char[25];
 
@@ -66,15 +70,16 @@ public class LinkedStackTest {
             topOperator = operatorStack.pop();
             postfix = postfix + topOperator;
         }
-        postfixChar = postfix.toCharArray();
-        return postfixChar;
+        return postfix;
     } // end of ConvertToPostfix
+
 
     /**
      * Determines the precedence of a given operator.
      * @param operator The operator whose precedence will be determined.
      * @return Integer value of the operator's precedence.
      */
+    // Unit Testing for this method is in this file, since it is private
     private static int getPrecedence(char operator) {
         int precedence = 0;
        
@@ -107,16 +112,50 @@ public class LinkedStackTest {
         String infix1 = "a/b*(c+(d-e))"; 
         String infix2 = "a*b/(c-a)+d*e";
 
-        // changing result of converToPostfix to string
-        String postfix1 = String.valueOf(convertToPostfix(infix1));
-        String postfix2 = String.valueOf(convertToPostfix(infix2));
+        String postfix1 = convertToPostfix(infix1);
+        String postfix2 = convertToPostfix(infix2);
 
         // outputing results formated to show the starting input and the output of algorithm
         System.out.println("Coverting infix to postfix: \n");
         System.out.println("Infix: " + infix1 + " ->  Postfix: " + postfix1 + "\n");
         System.out.println("Infix: " + infix2 + " ->  Postfix: " + postfix2 + "\n");
        
+    }
 
+     /**
+     * Testing getPrecedence (Private method)
+     */
+
+    // Testing getPrecedence with valid operator input
+    @Test
+    public void getPrecedence_ValidInput() {
+        char[] operatorArray = {'+','-','*','/','(',')'};
+      
+        int expectedValue1 = 1;
+        int expectedValue2 = 2;
+        int expectedValue3 = 0;
+
+        assertEquals(expectedValue1, LinkedStackTest.getPrecedence(operatorArray[0]));
+        assertEquals(expectedValue1, LinkedStackTest.getPrecedence(operatorArray[1]));
+
+        assertEquals(expectedValue2, LinkedStackTest.getPrecedence(operatorArray[2]));
+        assertEquals(expectedValue2, LinkedStackTest.getPrecedence(operatorArray[3]));
+
+        assertEquals(expectedValue3, LinkedStackTest.getPrecedence(operatorArray[4]));
+        assertEquals(expectedValue3, LinkedStackTest.getPrecedence(operatorArray[5]));
+    }
+
+    // Testing getPrecedence with invalid input
+    @Test
+    public void getPrecedence_InvalidInput() {
+        char invalidOperator1 = '=';
+        char invalidOperator2 = '`';
+        char invalidOperator3 = 'b';
+        int expectedResult = 0;
+
+        assertEquals(expectedResult,getPrecedence(invalidOperator1));
+        assertEquals(expectedResult,getPrecedence(invalidOperator2));
+        assertEquals(expectedResult,getPrecedence(invalidOperator3));
 
     }
 
