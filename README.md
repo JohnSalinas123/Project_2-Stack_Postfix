@@ -48,6 +48,6 @@ Unit testing on added methods using unit test framework (John Salinas)
 [Click here for index.html](/doc/index.html)
 
 ## iv) Link to screencast:
-[Click here for index.html](https://www.youtube.com/watch?v=nv9jt-1DMhU)
+[Click here for index.html](https://www.youtube.com/watch?v=nv9jt-1DMhU) <br />
 [Click here for link on web](https://gracious-gates-289cc8.netlify.app/stackinterface)
 
