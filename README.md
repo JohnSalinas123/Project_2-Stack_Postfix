@@ -42,9 +42,11 @@ Javadoc comments (John Salinas)
 
 Screencast recording, talk about your code briefly, less than 3 minutes (All members)
 
-Unit testing on added methods using unit test framework (Priscilla)
+Unit testing on added methods using unit test framework (John Salinas)
 
 ## iii) Link to Javadoc:
+[Click here for index.html](/doc/index.html)
 
 ## iv) Link to screencast:
+[Click here for index.html](https://www.youtube.com/watch?v=nv9jt-1DMhU)
 
